@@ -16,9 +16,9 @@ class UI {
         books.forEach((book) => UI.addBookToList(book));
     }
 
+
     static addBookToList(book) {
         const list = document.querySelector('#book-list');
-
         const row = document.createElement('tr');
 
         row.innerHTML = `
@@ -38,6 +38,7 @@ class UI {
         }
     }
 
+
     static showAlert(message, className) {
         const div = document.createElement('div');
         div.className = `alert alert-${className}`;
@@ -50,11 +51,11 @@ class UI {
         setTimeout(() => document.querySelector('.alert').remove(), 3000);
     }
 
+
     static clearFields() {
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
         document.querySelector('#isbn').value = '';
-
     }
 }
 
@@ -68,28 +69,24 @@ class Store {
         } else {
             books = JSON.parse(localStorage.getItem('books'));
         }
-
         return books;
     }
 
+
     static addBook(book) {
         const books = Store.getBooks();
-
         books.push(book);
-
         localStorage.setItem('books', JSON.stringify(books));
-
     }
+
 
     static removeBook(isbn) {
         const books = Store.getBooks();
-
         books.forEach((book, index) => {
             if (book.isbn === isbn) {
                 books.splice(index, 1);
             }
         });
-
         localStorage.setItem('books', JSON.stringify(books));
     }
 }
@@ -97,6 +94,7 @@ class Store {
 
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
 
 // Event: Add a Book
 document.querySelector('#book-form').addEventListener('submit', (e) => {
@@ -108,7 +106,6 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const isbn = document.querySelector('#isbn').value;
-
 
     // Validate
     if (title === '' || author === '' || isbn === '') {
@@ -126,19 +123,16 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
         // Show success message
         UI.showAlert('Book Added', 'success');
 
-
         //  Clear fields
         UI.clearFields();
 
         // console.log(book);
     }
-
-
 });
 
-// Event: Remove a Book
 
-document.querySelector('#book-list').addEventListener('click', (e) => {
+    // Event: Remove a Book
+    document.querySelector('#book-list').addEventListener('click', (e) => {
 
     //  Remove book from UI
     UI.deleteBook(e.target);
