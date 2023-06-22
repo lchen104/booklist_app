@@ -1,0 +1,8 @@
+/* Added these styles to widen the button to 100% of parent and to add a margin-bottom to spaceout input */
+.btn {
+    width: 100%;
+}
+
+input {
+    margin-bottom: 20px;
+}
